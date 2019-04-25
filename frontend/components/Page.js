@@ -3,17 +3,16 @@ import { ScrapeProvider } from './ScrapeContext';
 
 // Custom hook
 function useScrapes() {
-  const [scrapes, setScrapes] = useState({});
-  useEffect(
+  const [scrapes, setScrapes] = useState({ twitter: [], instagram: [] });
+  useEffect(function() {
     (async () => {
       console.log('Mounting or updating.');
       const res = await fetch('http://localhost:3001/data');
       const data = await res.json();
       console.log(data);
       setScrapes(data);
-    })(),
-    []
-  );
+    })();
+  }, []);
 
   return scrapes;
 }
