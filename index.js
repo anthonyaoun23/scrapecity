@@ -1,5 +1,11 @@
 import express from 'express';
+import lowdb from 'lowdb';
+import FileSync from 'lowdb/adapters/FileSync';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
+
+// Setup the DB
+const adapter = new FileSync('db.json');
+const db = lowdb(adapter);
 
 const app = express();
 
@@ -11,7 +17,7 @@ app.get('/scrape', async (req, res, next) => {
   ]);
 
   console.log(
-    `You have ${twCount} followers on twitter and ${igCount} followers on instagram.`
+    `You have ${twCount} followers on twitter and ${igCount} followers on instagram!`
   );
 
   res.json({ igCount, twCount });
