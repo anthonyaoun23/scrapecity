@@ -1,3 +1,10 @@
+import Page from '../components/Page';
+
 export default function Home() {
-  return <p>Hey</p>;
+  return (
+    <Page>
+      <p>Hey</p>
+      <p>Hello</p>
+    </Page>
+  );
 }
