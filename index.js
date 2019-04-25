@@ -1,6 +1,10 @@
+import express from 'express';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
 
-async function go() {
+const app = express();
+
+app.get('/scrape', async (req, res, next) => {
+  console.log('Scraping!');
   const [igCount, twCount] = await Promise.all([
     getInstagramCount(),
     getTwitterCount()
@@ -9,6 +13,10 @@ async function go() {
   console.log(
     `You have ${twCount} followers on twitter and ${igCount} followers on instagram.`
   );
-}
 
-go();
+  res.json({ igCount, twCount });
+});
+
+app.listen(3000, () => {
+  console.log(`App running on port 3000`);
+});
