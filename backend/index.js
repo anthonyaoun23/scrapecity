@@ -19,6 +19,13 @@ app.get('/scrape', async (req, res, next) => {
   res.json({ igCount, twCount });
 });
 
-app.listen(3000, () => {
+app.get('/data', async (req, res, next) => {
+  // get scraped data
+  const data = db.value();
+  // respond with json
+  res.json(data);
+});
+
+app.listen(3001, () => {
   console.log(`App running on port 3000`);
 });
